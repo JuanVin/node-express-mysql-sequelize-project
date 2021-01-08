@@ -1,0 +1,34 @@
+<%- include ('partials/_header.ejs') %>
+<div class="sidenav">
+    <div class="login-main-text">
+       <h1 class="text-secondary">Ministerio Público<br> Mendoza </h1>
+       <h2>Sistema U.D.A.P.I.F.</h2>
+    </div>
+ </div>
+ <div class="main">
+    <div class="col-md-6 col-sm-12">
+       <div class="sign-form">
+          <form action="/signup" method="POST">
+             <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" name="firstname" placeholder="Nombre de usuario">
+             </div>
+             <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" class="form-control" name="lastname" placeholder="Nombre de usuario">
+             </div>
+             <div class="form-group">
+                <label>Nombre de Usuario</label>
+                <input type="text" class="form-control" name="username" placeholder="Nombre de usuario">
+             </div>
+             <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+             </div>
+             <button type="submit" class="btn btn-success">Registrar</button>
+             <a href="login" class="btn btn-link">Volver</a>
+          </form>
+       </div>
+    </div>
+ </div>
+<%- include ('partials/_footer') %>
