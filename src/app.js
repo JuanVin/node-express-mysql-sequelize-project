@@ -32,7 +32,8 @@ app.use(bodyParser.json());
 app.use(session({ 
     secret:process.env.EXPRESS_SESSION_SECRET,
     resave: true, 
-    saveUninitialized:true
+    saveUninitialized:true,
+    expires: new Date(Date.now() + (180000)) 
     }));  
 
 app.use(passport.initialize());
