@@ -5,12 +5,10 @@ const   express = require('express'),
         bodyParser = require('body-parser'),
         sequelize = require('./database/db'),
         morgan = require ('morgan'),
-        path = require('path'), // Module from NodeJS
-        cookieParser = require('cookie-parser');
+        path = require('path'); // Module from NodeJS
         
-        require('dotenv').config();
-
-var models = require ('./models');      
+var     env =   require('dotenv').config(),
+        models = require ('./models');      
 
         require('./passport/authPassport')(passport);
 
@@ -33,8 +31,8 @@ app.use(bodyParser.json());
 // For pasport
 app.use(session({ 
     secret:process.env.EXPRESS_SESSION_SECRET,
-    resave: false, 
-    saveUninitialized:false
+    resave: true, 
+    saveUninitialized:true
     }));  
 
 app.use(passport.initialize());
@@ -48,7 +46,7 @@ app.use(require('./routes'));
 // Starting the server
 app.listen(PORT, ()=>{
     console.log(`Server on port ${PORT}`);
-    sequelize.sync({ force: true}).then(()=>{
+    sequelize.sync({ force: false}).then(()=>{
         console.log("Conectado a base de datos")
     }).catch(err => {
         console.log(err)

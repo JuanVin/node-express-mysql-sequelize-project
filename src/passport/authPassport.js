@@ -1,5 +1,8 @@
 var bCrypt = require('bcrypt');
-user = require('../models/Users')
+
+user = require('../models/Users');
+
+
 module.exports = function(passport) {
 
     var LocalStrategy = require('passport-local').Strategy;
@@ -18,45 +21,35 @@ module.exports = function(passport) {
         });
     });
 
-
     var User = user;
  
     var LocalStrategy = require('passport-local').Strategy;
  
     //LOCAL SIGNUP
 
-    passport.use('local-signup', new LocalStrategy(
+    passport.use('local-signup', new LocalStrategy( // Working
  
         {
- 
+
             passReqToCallback: true // allows us to pass back the entire request to the callback
- 
         },
- 
- 
- 
         function(req, username, password, done) {
  
-            var generateHash = function(password) {
- 
-                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
- 
+            var generateHash = function(password) { 
+                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null); 
             };
- 
- 
  
             User.findOne({
                 where: {
                     username: username
                 }
-            }).then(function(user) {
+            }).then(function(aux) {
  
-                if (user)
+                if (aux)
  
                 {
- 
                     return done(null, false, {
-                        message: 'That email is already taken'
+                        message: 'That User is already taken'
                     });
  
                 } else
@@ -82,41 +75,30 @@ module.exports = function(passport) {
                     User.create(data).then(function(newUser, created) {
  
                         if (!newUser) {
- 
                             return done(null, false);
- 
                         }
  
                         if (newUser) {
- 
                             return done(null, newUser);
- 
                         }
- 
                     });
- 
                 }
- 
             });
- 
         }
- 
     ));
  
-    //LOCAL SIGNIN
+    //LOCAL LOGIN
 
     passport.use('local-login', new LocalStrategy(
- 
+
         {
             passReqToCallback: true 
         },
-     
-     
+        
         function(req, username, password, done) {
-    
-     
+            
             var isValidPassword = function(userpass, password) {
-     
+                
                 return bCrypt.compareSync(password, userpass);
      
             }
@@ -125,29 +107,26 @@ module.exports = function(passport) {
                 where: {
                     username: username
                 }
-            }).then(function(user) {
-     
-                if (!user) {
-     
+            }).then(function(aux) {
+                if (!aux) {
+                    console.log('User does not exist');
                     return done(null, false, {
-                        message: 'Email does not exist'
+                        message: 'User does not exist'
                     });
-     
                 }
      
-                if (!isValidPassword(user.password, password)) {
-     
+                if (!isValidPassword(aux.password, password)) {
+                    console.log('User does not exist');
                     return done(null, false, {
-                        message: 'Email does not exist'
+                        message: 'User does not exist'
                     });
-     
                 }
                 
-                return done(null, user);
+                return done(null, aux);
      
             }).catch(function(err) {
      
-                console.log("Error:", err);
+                console.log("Error:");
      
                 return done(null, false, {
                     message: 'Email does not exist'
@@ -156,6 +135,5 @@ module.exports = function(passport) {
         }  
     ));
 }
-
 
 

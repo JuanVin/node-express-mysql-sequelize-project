@@ -2,26 +2,28 @@ const express = require ("express");
 const router = express.Router();
 const passport = require('passport');
 
-const logController = require('../controller/logcontroller');
-const signController = require('../controller/signcontroller');
-const dashController = require('../controller/dashcontroller');
+const logController = require('../controllers/logcontroller');
+const signController = require('../controllers/signcontroller');
+const dashController = require('../controllers/dashcontroller');
 
 //LOGIN
 router.get('/login', logValidator, logController.log);
 
-router.post('/login', passport.authenticate('local-login', {
+router.post('/login', passport.authenticate('local-login',  { 
     
     successRedirect: '/dashboard',
-    failureRedirect: '/login',
-    }));
+    failureRedirect: '/login'
+
+}));
 
 //SIGNUP
-router.get('/signup', signController.add);
+router.get('/signup', logValidator, signController.add);
 
 router.post('/signup', passport.authenticate('local-signup', {
     
     successRedirect: '/dashboard',
-    failureRedirect: '/signup',
+    failureRedirect: '/signup'
+
     }));
 
 // LOGOUT
