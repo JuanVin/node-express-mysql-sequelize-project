@@ -13,7 +13,6 @@ router.post('/login', passport.authenticate('local-login', {
     
     successRedirect: '/dashboard',
     failureRedirect: '/login',
-    failureFlash: true
     }));
 
 //SIGNUP
@@ -23,12 +22,17 @@ router.post('/signup', passport.authenticate('local-signup', {
     
     successRedirect: '/dashboard',
     failureRedirect: '/signup',
-    failureFlash: true
     }));
+
+// LOGOUT
 
 router.get('/logout', dashController.logout);
 
+// DASHBOARD
+
 router.get('/dashboard', isLoggedIn, dashController.dashboard);
+
+// VALIDATE FUNCTIONS
 
 function isLoggedIn(req, res, next) {
         if (req.isAuthenticated())

@@ -1,18 +1,20 @@
-const cookieParser = require('cookie-parser');
-
 const   express = require('express'),
         app = express(),
-        sequalize = require('./database/db'),
+        passport = require('passport'),    
+        session = require('express-session'),
+        bodyParser = require('body-parser'),
+        sequelize = require('./database/db'),
         morgan = require ('morgan'),
         path = require('path'), // Module from NodeJS
-        passport = require('passport'),
-        session = require('express-session'),
-        flash = require("connect-flash"),
-        cookie = require("cookie-parser");
-
-        require ('./database/models/associations');
+        cookieParser = require('cookie-parser');
+        
         require('dotenv').config();
-        require('./passport/authpassport')(passport);
+
+var models = require ('./models');      
+
+        require('./passport/authPassport')(passport);
+
+
 //Settings
 
 const PORT = process.env.PORT || 3000;
@@ -23,16 +25,20 @@ app.set('views', path.join(__dirname, 'views'));
 //Middleware
 
 app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
+//For BodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.use(cookie());
-app.use(session({ secret:process.env.EXPRESS_SESSION_SECRET,resave: false, saveUninitialized:false}));       
+// For pasport
+app.use(session({ 
+    secret:process.env.EXPRESS_SESSION_SECRET,
+    resave: false, 
+    saveUninitialized:false
+    }));  
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
-
 
 // Routes
 
@@ -42,7 +48,7 @@ app.use(require('./routes'));
 // Starting the server
 app.listen(PORT, ()=>{
     console.log(`Server on port ${PORT}`);
-    sequalize.sync({ force: false}).then(()=>{
+    sequelize.sync({ force: true}).then(()=>{
         console.log("Conectado a base de datos")
     }).catch(err => {
         console.log(err)
