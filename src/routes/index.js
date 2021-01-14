@@ -9,22 +9,12 @@ const dashController = require('../controllers/dashcontroller');
 //LOGIN
 router.get('/login', logValidator, logController.log);
 
-router.post('/login', passport.authenticate('local-login',  { 
-    
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-
-}));
+router.post('/login', logController.auth);
 
 //SIGNUP
 router.get('/signup', logValidator, signController.add);
 
-router.post('/signup', passport.authenticate('local-signup', {
-    
-    successRedirect: '/dashboard',
-    failureRedirect: '/signup'
-
-    }));
+router.post('/signup', signController.auth);
 
 // LOGOUT
 
@@ -33,6 +23,8 @@ router.get('/logout', dashController.logout);
 // DASHBOARD
 
 router.get('/dashboard', isLoggedIn, dashController.dashboard);
+
+router.post('/cargarTurno', dashController.turn)
 
 // VALIDATE FUNCTIONS
 

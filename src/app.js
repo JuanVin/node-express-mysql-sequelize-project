@@ -47,7 +47,7 @@ app.use(require('./routes'));
 // Starting the server
 app.listen(PORT, ()=>{
     console.log(`Server on port ${PORT}`);
-    sequelize.sync({ force: false}).then(()=>{
+    sequelize.sync({ force: false }).then(()=>{
         console.log("Conectado a base de datos")
     }).catch(err => {
         console.log(err)

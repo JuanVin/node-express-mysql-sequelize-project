@@ -19,7 +19,6 @@ const Expediente = sequelize.define('file', {
     },
     fechaEgreso: {
         type: DataTypes.DATE,
-        allowNull: false
     }
 }, {});
 

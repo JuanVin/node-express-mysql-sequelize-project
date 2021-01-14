@@ -1,7 +1,7 @@
 
 const sequelize = require('./db');
-const Unit = require('./models/Units');
-require ('./associations');
+const Unit = require('../models/Units');
+require ('../models/associations');
 
 const unit = [
     {unidad: "Homicidios"},
@@ -14,7 +14,7 @@ const unit = [
 ]
 
 sequelize.sync({force:false}).then(() => {
-    console.log("asdasd")
+
 }).then(() => {
     unit.forEach(user => Unit.create(user))
 })
