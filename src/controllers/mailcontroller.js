@@ -1,3 +1,5 @@
+
+module.exports = function(req,res,email){
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
@@ -12,10 +14,10 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-    from: `"Some thing" ${process.env.SENDER_EMAIL}`,
-    to: process.env.SENDER_EMAIL,
-    subject: '',
-    text: ''
+    from: `"U.D.A.P.I.F." ${process.env.SENDER_EMAIL}`,
+    to: email,
+    subject: `Turno Expediente: ${req.body.exp}`,
+    text: `Fecha: ${req.body.date} a las ${req.body.time}`
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -25,3 +27,4 @@ transporter.sendMail(mailOptions, function(error, info){
         console.log("Email sent");
     }
 });
+}

@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require ('../database/db');
+const Observacion = require('./Observations');
 
 const Expediente = sequelize.define('file', {
     expediente: {
@@ -21,5 +22,7 @@ const Expediente = sequelize.define('file', {
         type: DataTypes.DATE,
     }
 }, {});
+
+        Expediente.hasMany(Observacion);
 
 module.exports = Expediente;

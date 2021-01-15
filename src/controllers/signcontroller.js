@@ -10,6 +10,6 @@ signController.auth = (passport.authenticate('local-signup', {
     successRedirect: '/dashboard',
     failureRedirect: '/signup'
 
-}))
+    }))
 
 module.exports = signController;

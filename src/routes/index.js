@@ -1,6 +1,5 @@
 const express = require ("express");
 const router = express.Router();
-const passport = require('passport');
 
 const logController = require('../controllers/logcontroller');
 const signController = require('../controllers/signcontroller');
@@ -12,6 +11,7 @@ router.get('/login', logValidator, logController.log);
 router.post('/login', logController.auth);
 
 //SIGNUP
+
 router.get('/signup', logValidator, signController.add);
 
 router.post('/signup', signController.auth);

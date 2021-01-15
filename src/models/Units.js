@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require ('../database/db');
+const Expediente = require('./Files');
 
 const Unidad = sequelize.define('unit', {
     unidad: {
@@ -11,5 +12,7 @@ const Unidad = sequelize.define('unit', {
         validate: {isEmail:true} 
     },
 }, {});
+
+    Unidad.hasMany(Expediente);
 
 module.exports = Unidad;
