@@ -1,3 +1,42 @@
-<div class="page" id="filePage">
-    <h3>otra cosa</h3>
+<div class="container">
+    
+    <h1>Turnos de hoy: </h1>
+    <h2 id="date"></h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Expediente</th>
+            <th scope="col">Unidad Fiscal</th>
+            <th scope="col">Hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let i = 0; i<file.length; i++){ %>
+          <tr>
+            <th scope="row"><%=file[i].dataValues.id%></th>
+            <td><%= file[i].dataValues.expediente %></td>
+            <% units.forEach(function(unit) {  
+              if(unit.id === file[i].dataValues.unitId){ %>
+                <td><%= unit.unidad %></td> 
+            <% }
+            })%>             
+            <td><%= file[i].dataValues.horaTurno %></td>
+            <td>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title=<%= file[i].dataValues.horaTurno %>>
+                Tooltip on top
+              </button>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
 </div>
+<script> 
+    const n =  new Date();
+    const y = n.getFullYear();
+    const m = n.getMonth() + 1;
+    const d = n.getDate();
+    document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
+</script>

@@ -19,16 +19,17 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-
 //Middleware
 
 app.use(morgan('dev'));
 
 //For BodyParser
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // For pasport
+
 app.use(session({ 
     secret:process.env.EXPRESS_SESSION_SECRET,
     resave: true, 

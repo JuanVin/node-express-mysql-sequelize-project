@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,16 +43,17 @@
     
         <ul class="nav nav-pills nav-stacked" style="border-right:1px solid black">
             <!--<li class="nav-header"></li>-->
-            <li><a href="#/"><i class="fa fa-dashboard"></i> Dar/Cargar Turno </a></li>
-            <li><a href="#/filePage"><i class="fa fa-tags"></i> Expedientes</a></li>
-            <li><a href="#/turnPage"><i class="fa fa-history"></i> Dar turno</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Dar/Cargar Turno </a></li>
+            <li><a href="#" id="files"><i class="fa fa-tags"></i> Expedientes</a></li>
+            <li><a href="#" id="turns"><i class="fa fa-history"></i> Dar turno</a></li>
             <li><a href="#"><i class="fa fa-lock"></i> Change Password</a></li>
     
         </ul>
     </div><!-- /span-3 -->
     <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
-        <!-- Right -->
+        <%- include ('partials/_files.ejs') %>
         <%- include ('partials/_turn.ejs') %>
+
     </div>
 <%- include ('partials/_footer') %>
 

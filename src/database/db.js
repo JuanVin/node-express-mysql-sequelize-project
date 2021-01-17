@@ -7,7 +7,8 @@ const sequelize = new Sequelize(
     database.password
     , {
     host: database.host,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    timezone: 'America/Argentina/Buenos_Aires'
 });
 
 module.exports = sequelize;
